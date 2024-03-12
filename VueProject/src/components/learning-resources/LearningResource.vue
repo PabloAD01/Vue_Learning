@@ -19,6 +19,7 @@
 <script>
 export default {
   props: ['id', 'title', 'description', 'link'],
+  inject: ['deleteResource'],
 };
 </script>
 

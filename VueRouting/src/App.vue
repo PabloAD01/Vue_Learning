@@ -3,7 +3,17 @@
   <main>
     <router-view></router-view>
   </main>
+
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
+
+<!-- 
+  Se pueden tener multiples rutas
+  dependiendo del nombre que se le pase a la ruta
+  se renderizará el componente correspondiente.
+  -->
 
 <script>
 import TheNavigation from './components/nav/TheNavigation.vue';

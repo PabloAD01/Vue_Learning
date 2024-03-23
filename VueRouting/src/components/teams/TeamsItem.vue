@@ -11,7 +11,15 @@ export default {
   props: ['id', 'name', 'memberCount'],
   computed: {
     teamMembersLink() {
-      return '/teams/' + this.id;
+      /*  return '/teams/' + this.id; */
+      return {
+        /* De esta manera puedes redirigir a una ruta dinámica */
+        name: 'team-members',
+        params: { teamId: this.id },
+        query: { sort: 'asc' },
+        /* se puede añadir un query a la ruta dinámica sin tener
+        que cambiar el path */
+      };
     },
   },
 };

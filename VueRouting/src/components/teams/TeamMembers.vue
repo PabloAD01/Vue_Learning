@@ -43,7 +43,18 @@ export default {
   },
   created() {
     this.loadTeamMembers(this.teamId);
+    console.log(this.$route.query);
+    /* Se pueden acceder a los querys de la ruta al componente
+     */
   },
+  /* 
+  Esto cumpliria el mismo objetivo del "watcher", pero la manera de pasar
+  los props volvería a ser a traves de la ruta en vez de a traves de los props
+  
+  beforeRouteUpdate(to, from, next) {
+    this.loadTeamMembers(to.params.teamId);
+    next();
+  }, */
   watch: {
     teamId(newId) {
       this.loadTeamMembers(newId);

@@ -23,6 +23,13 @@ export default {
       this.$router.push('/teams');
     },
   },
+
+  /* Con este código, se puede controlar el acceso a la ruta antes de ingresar a esta */
+  beforeRouteEnter(to, from, next) {
+    console.log('UsersList Cmp beforeRouteEnter');
+    console.log(to, from);
+    next();
+  },
 };
 </script>
 

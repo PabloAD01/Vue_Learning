@@ -47,6 +47,7 @@ export default {
     /* Se pueden acceder a los querys de la ruta al componente
      */
   },
+
   /* 
   Esto cumpliria el mismo objetivo del "watcher", pero la manera de pasar
   los props volvería a ser a traves de la ruta en vez de a traves de los props

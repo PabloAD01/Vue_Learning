@@ -1,11 +1,14 @@
 <template>
+  <!-- <div class="container">
+    <list-data></list-data>
+  </div>
   <div class="container">
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
     <transition
-      name="para"
+      :css="false"
       @before-enter="beforeEnter"
       @enter="enter"
       @after-enter="afterEnter"
@@ -18,7 +21,9 @@
       <p v-if="paraIsVisible">This is only sometimes visible...</p>
     </transition>
 
-    <button @click="toggleParagraph">Toggle Paragraph</button>
+    <button @click="toggleParagraph" :disabled="toggleDisabled">
+      Toggle Paragraph
+    </button>
   </div>
 
   <div class="container">
@@ -34,11 +39,22 @@
 
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
-  </div>
+  </div> -->
+
+  <router-view v-slot="slotProps">
+    <transition name="fade-button" mode="out-in">
+      <component :is="slotProps.Component"></component>
+    </transition>
+  </router-view>
 </template>
 
 <script>
+/* import ListData from './components/ListData.vue';
+ */
 export default {
+  components: {
+    /* ListData, */
+  },
   data() {
     return {
       animatedBlock: false,
@@ -47,6 +63,7 @@ export default {
       usersAreVisible: false,
       enterInterval: null,
       leaveInterval: null,
+      toggleDisabled: false,
     };
   },
   methods: {
@@ -94,7 +111,7 @@ export default {
           clearInterval(this.leaveInterval);
           done();
         }
-      }, 10);
+      }, 20);
     },
     afterLeave(el) {
       console.log('afterLeave');
@@ -110,7 +127,13 @@ export default {
       this.animatedBlock = true;
     },
     toggleParagraph() {
-      this.paraIsVisible = !this.paraIsVisible;
+      if (!this.toggleDisabled) {
+        this.paraIsVisible = !this.paraIsVisible;
+        this.toggleDisabled = true;
+        setTimeout(() => {
+          this.toggleDisabled = false;
+        }, 1000);
+      }
     },
     showDialog() {
       this.dialogIsVisible = true;
@@ -181,6 +204,18 @@ button:active {
 }
 .fade-button-leave-active {
   transition: opacity 0.3s ease-in;
+}
+
+.router-enter-from {
+}
+.router-enter-active {
+  animation: slide-scale 0.4s ease-out;
+}
+.router-enter-to {
+}
+
+.router-leave-active {
+  animation: slide-scale 0.3s ease-in;
 }
 
 @keyframes slide-scale {

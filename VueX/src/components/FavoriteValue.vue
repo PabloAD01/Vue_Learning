@@ -1,5 +1,6 @@
 <template>
   <h3>{{ counter }}</h3>
+  <p>Favorite Value:</p>
 </template>
 
 <script>

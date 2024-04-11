@@ -7,8 +7,13 @@ const store = createStore({
   },
   state() {
     return {
-      lastFetch: null,
+      userId: 'c3',
     };
+  },
+  getters: {
+    userId(state) {
+      return state.userId;
+    },
   },
 });
 

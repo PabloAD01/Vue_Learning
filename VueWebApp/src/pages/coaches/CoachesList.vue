@@ -1,35 +1,37 @@
 <template>
-  <base-dialog :show="!!error" title="An error occurred" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <coach-filter @change-filter="setFilters"></coach-filter>
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" @click="loadCoaches(true)"
-          >Refresh</base-button
-        >
-        <base-button v-if="!isCoach && !isLoading" link to="/register"
-          >Register as a Coach</base-button
-        >
-      </div>
-      <div v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-else-if="hasCoaches">
-        <coach-item
-          v-for="coaches in filteredCoaches"
-          :key="coaches.id"
-          :id="coaches.id"
-          :first-name="coaches.firstName"
-          :last-name="coaches.lastName"
-          :rate="coaches.hourlyRate"
-          :areas="coaches.areas"
-        ></coach-item>
-      </ul>
-      <h3 v-else>No coaches found.</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog :show="!!error" title="An error occurred" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <coach-filter @change-filter="setFilters"></coach-filter>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" @click="loadCoaches(true)"
+            >Refresh</base-button
+          >
+          <base-button v-if="!isCoach && !isLoading" link to="/register"
+            >Register as a Coach</base-button
+          >
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="hasCoaches">
+          <coach-item
+            v-for="coaches in filteredCoaches"
+            :key="coaches.id"
+            :id="coaches.id"
+            :first-name="coaches.firstName"
+            :last-name="coaches.lastName"
+            :rate="coaches.hourlyRate"
+            :areas="coaches.areas"
+          ></coach-item>
+        </ul>
+        <h3 v-else>No coaches found.</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>

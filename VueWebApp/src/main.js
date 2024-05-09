@@ -7,6 +7,9 @@ import BaseButton from './components/UI/BaseButton.vue';
 import BaseBadge from './components/UI/BaseBadge.vue';
 import BaseSpinner from './components/UI/BaseSpinner.vue';
 import BaseDialog from './components/UI/BaseDialog.vue';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables
 
 const app = createApp(App);
 

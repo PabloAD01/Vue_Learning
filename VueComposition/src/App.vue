@@ -10,6 +10,10 @@ export default {
   setup() {
     const uName = ref('Pablo');
 
+    setTimeout(() => {
+      uName.value = 'Pedro';
+    }, 3000);
+
     return { userName: uName };
   },
   /* data() {

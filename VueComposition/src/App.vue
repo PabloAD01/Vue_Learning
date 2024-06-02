@@ -4,26 +4,39 @@
     <h3>{{ age }}</h3>
     <button @click="setAge">Change Age</button>
     <div>
-      <input type="text" placeholder="First Name" @input="setFirstName" />
-      <input type="text" placeholder="Last Name" @input="setLastName" />
+      <input type="text" placeholder="First Name" v-model="firstName" />
+      <input type="text" placeholder="Last Name" v-model="lastName" />
     </div>
   </section>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 /* import { reactive } from 'vue'; */
 
 export default {
   setup() {
-    /*     const uName = ref('Pablo');
-     */ const uAge = ref(28);
+    /*     
+    const uName = ref('Pablo');
+     */
+    const uAge = ref(28);
     const firstName = ref('');
     const lastName = ref('');
     /* const user = reactive({ name: 'Pablo', age: 28 }); */
 
     const uName = computed(function () {
       return firstName.value + ' ' + lastName.value;
+    });
+    /* watch(uAge, function (newValue, oldValue) {
+      console.log('Age changed from ' + oldValue + ' to ' + newValue);
+    }); */
+
+    watch([uAge, uName], function (newValue, oldValue) {
+      console.log('Old age: ' + oldValue[0]);
+      console.log('New age: ' + newValue[0]);
+
+      console.log('Old name: ' + oldValue[1]);
+      console.log('New name: ' + newValue[1]);
     });
 
     /* Replacing the methods with just functions inside the setup
@@ -33,21 +46,12 @@ export default {
       uAge.value = 30;
     }
 
-    function setFirstName(event) {
-      firstName.value = event.target.value;
-    }
-
-    function setLastName(event) {
-      lastName.value = event.target.value;
-    }
-
     return {
       userName: uName,
       age: uAge,
       setAge: setNewAge,
-
-      setFirstName,
-      setLastName,
+      firstName,
+      lastName,
     };
   },
 

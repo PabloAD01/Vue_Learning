@@ -4,7 +4,16 @@
 </template>
 
 <script>
-import { computed, inject } from 'vue';
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+} from 'vue';
 
 export default {
   props: ['firstName', 'lastName'],

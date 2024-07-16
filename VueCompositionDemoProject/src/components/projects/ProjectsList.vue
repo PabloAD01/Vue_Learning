@@ -21,8 +21,9 @@
 </template>
 
 <script>
-import { ref, computed, watch, toRefs } from 'vue';
+import { computed, watch, toRefs } from 'vue';
 import ProjectItem from './ProjectItem.vue';
+import useSearch from '../hooks/search.js';
 
 export default {
   components: {
@@ -31,7 +32,7 @@ export default {
   props: ['user'],
 
   setup(props) {
-    const enteredSearchTerm = ref('');
+    /* const enteredSearchTerm = ref('');
     const activeSearchTerm = ref('');
 
     const availableProjects = computed(function () {
@@ -41,34 +42,43 @@ export default {
         );
       }
       return props.user.projects;
+    }); */
+
+    const { user } = toRefs(props);
+
+    const projects = computed(function () {
+      return user.value ? user.value.projects : [];
     });
+
+    const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
+      projects,
+      'title'
+    );
 
     const hasProjects = computed(function () {
-      return props.user.projects && availableProjects.value.length > 0;
+      return props.user.projects && availableItems.value.length > 0;
     });
 
-    watch(enteredSearchTerm, function (val) {
+    /* watch(enteredSearchTerm, function (val) {
       setTimeout(() => {
         if (val === enteredSearchTerm.value) {
           activeSearchTerm.value = val;
         }
       }, 300);
-    });
-
-    const { user } = toRefs(props);
+    }); */
 
     watch(user, function () {
       enteredSearchTerm.value = '';
     });
 
-    function updateSearch(val) {
+    /* function updateSearch(val) {
       enteredSearchTerm.value = val;
-    }
+    } */
 
     return {
       enteredSearchTerm,
-      activeSearchTerm,
-      availableProjects,
+
+      availableProjects: availableItems,
       hasProjects,
       updateSearch,
     };

@@ -68,7 +68,7 @@ export default {
     }); */
 
     watch(user, function () {
-      enteredSearchTerm.value = '';
+      updateSearch('');
     });
 
     /* function updateSearch(val) {
